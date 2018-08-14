@@ -25,7 +25,7 @@ struct process_pack_t string_process(data_t * m2mem, data_t * m2alloc, data_t * 
 			hashtable_entry_add(m2mem, m2alloc, buffer, ipack.ptr_hashtable, meta_node.pair);
 			while(meta_node.ptr_hdList != NULL_PTR){
 				meta_node = list_node_remove(m2mem, m2alloc, buffer, meta_node.ptr_hdList);
-				hashtable_entry_add(im2mem, m2alloc, buffer, pack.ptr_hashtable, meta_node.pair);
+				hashtable_entry_add(m2mem, m2alloc, buffer, ipack.ptr_hashtable, meta_node.pair);
 			}
 			opack.ptr_list = NULL_PTR;
 		}
