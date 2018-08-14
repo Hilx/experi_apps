@@ -4,6 +4,7 @@ int graphcore(data_t * slaveAxi, data_t * m2mem, data_t * m2alloc, data_t timer_
 
 	#pragma HLS INTERFACE s_axilite port=slaveAxi   bundle=SlavePort
 	#pragma HLS INTERFACE s_axilite port=return     bundle=SlavePort
+	#pragma HLS INTERFACE s_axilite port=timer_addr bundle=SlavePort		
 	#pragma HLS INTERFACE s_axilite port=num_iter 	bundle=SlavePort
 	#pragma HLS INTERFACE s_axilite port=rng_range 	bundle=SlavePort
 	#pragma HLS INTERFACE m_axi	depth=1	port=m2mem	 offset=off
