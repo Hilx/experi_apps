@@ -1,7 +1,9 @@
+#include "trans.h"
 
 // in-trann. list operations // unsorted list
 ptr_t list_node_add(ptr_t ptr, struct pair_t entry){
-	ptr ptr_hdList = custom_malloc(sizeof(struct list_node_t));
+	printf("- list node add \n");
+	ptr_t ptr_hdList = custom_malloc(sizeof(struct list_node_t));
 	struct list_node_t node;
 	node.ptr_next = ptr;
 	node.pair.key = entry.key;
@@ -10,14 +12,15 @@ ptr_t list_node_add(ptr_t ptr, struct pair_t entry){
 	return ptr_hdList;
 }
 struct list_node_removed_t list_node_remove(ptr_t ptr){
+	printf("- list node remove \n");
 	struct list_node_removed_t returnSet;
 	returnSet.ptr_hdList = ptr;
 	if(ptr != NULL_PTR){
 		struct list_node_t node;
-		node = list_node_read(ptr_hdList);
+		node = list_node_read(ptr);
 		returnSet.pair = node.pair;
 		returnSet.ptr_hdList = node.ptr_next;
-		custom_free(ptr_hdList);
+		custom_free(ptr);
 	}
 	return returnSet;
 }
@@ -36,12 +39,13 @@ data_t hashing(data_t key){
 }
 ptr_t hashtable_create(void){
 	ptr_t ptr = custom_malloc(sizeof(data_t) * HASHTABLE_NUM_BUCKETS);
-	for(i = 0; i < HASHTABLE_NUM_BUCKETS; i++){
+	for(int i = 0; i < HASHTABLE_NUM_BUCKETS; i++){
 		hashtable_bucket_update(ptr, i, NULL_PTR);
 	}
 	return ptr;
 }
 void hashtable_entry_add(ptr_t ptr, struct pair_t entry){
+	printf("- hash entry add \n");
 	ptr_t ptr_buck = hashtable_bucket_get(ptr, entry.key);
 	ptr_t ptr_new = bucket_node_add(ptr_buck, entry);
 	if(ptr_buck != ptr_new){
@@ -50,12 +54,12 @@ void hashtable_entry_add(ptr_t ptr, struct pair_t entry){
 }
 // bucket operations // sorted list
 ptr_t bucket_node_create(ptr_t ptr_next, struct pair_t entry){
-	ptr_t ptr_newValsNode = vals_node_add(NULL_PTR, pair.val);
+	ptr_t ptr_newValsNode = vals_node_add(NULL_PTR, entry.val);
 	ptr_t ptr_newBuckNode = custom_malloc(sizeof(struct bucket_node_t));
 	struct bucket_node_t node;
 	node.ptr_next = ptr_next;
 	node.ptr_vals = ptr_newValsNode;
-	node.key = pair.key;	
+	node.key = entry.key;	
 	bucket_node_write(ptr_newBuckNode,node);
 	return ptr_newBuckNode;
 }
@@ -63,7 +67,7 @@ ptr_t bucket_node_add(ptr_t ptr, struct pair_t entry){
 	ptr_t ptr_hdList = ptr;
 	if(ptr == NULL_PTR){
 		ptr_t ptr_newBuckNode = bucket_node_create(ptr, entry);
-		ptr_hdList = ptr_newNode;
+		ptr_hdList = ptr_newBuckNode;
 	}else{ // have to search for a good spot for new node or existence check, if exists only add the val
 		struct bucket_node_t currNode = bucket_node_read(ptr);
 		struct bucket_node_t prevNode;

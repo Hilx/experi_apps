@@ -1,3 +1,5 @@
+#include "trans.h"
+
 // in-trann. list operations // unsorted list
 struct list_node_t list_node_read(ptr_t ptr){
 	data_t * ptr_i;
@@ -8,7 +10,7 @@ struct list_node_t list_node_read(ptr_t ptr){
 	node.pair.val = *(ptr_i + LIST_OFFSET_VAL);
 	return node;
 }
-void list_node_write(ptr_t ptr, struct list_node_t){
+void list_node_write(ptr_t ptr, struct list_node_t node){
 	data_t * ptr_i;
 	ptr_i = ptr;
 	*(ptr_i + LIST_OFFSET_PTR_NEXT) = node.ptr_next;
@@ -20,8 +22,8 @@ ptr_t hashtable_bucket_get(ptr_t ptr, data_t key){
 	data_t * ptr_i;
 	ptr_i = ptr;
 	data_t hashID = hashing(key);
-	ptr_t  = *(ptr_i + hashID);
-	return ptr_buck;
+	ptr_t ptr_bucket = *(ptr_i + hashID);
+	return ptr_bucket;
 }
 void hashtable_bucket_update(ptr_t ptr, data_t key, ptr_t ptr_bucket){
 	data_t * ptr_i;

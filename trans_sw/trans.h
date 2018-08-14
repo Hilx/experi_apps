@@ -3,7 +3,7 @@
 #include <stdio.h> // printf() - sw only
 
 #define NULL_PTR 0xFFFF0007
-#define HASHTABLE_NUM_BUCKETS 50
+#define HASHTABLE_NUM_BUCKETS 32
 
 #define LIST_OFFSET_PTR_NEXT 0
 #define LIST_OFFSET_KEY      1
@@ -20,11 +20,11 @@ struct pair_t{
 };
 struct list_node_removed_t{
 	ptr_t ptr_hdList;
-	pair_t pair;
+	struct pair_t pair;
 };
 struct list_node_t{
 	ptr_t ptr_next;
-	pair_t pair;
+	struct pair_t pair;
 };
 struct bucket_node_t{
 	ptr_t ptr_next;
@@ -43,7 +43,7 @@ ptr_t hashtable_bucket_get(ptr_t ptr, data_t key);
 struct bucket_node_t bucket_node_read(ptr_t ptr);
 struct vals_node_t vals_node_read(ptr_t ptr);
 // mem writes
-void list_node_write(ptr_t ptr, struct list_node_t);
+void list_node_write(ptr_t ptr, struct list_node_t node);
 void hashtable_bucket_update(ptr_t ptr, data_t key, ptr_t ptr_updated);
 void bucket_node_write(ptr_t ptr, struct bucket_node_t node);
 void vals_node_write(ptr_t ptr, struct vals_node_t node);
@@ -74,7 +74,7 @@ struct process_pack_t{
 	data_t key_valid;
 };
 
-struct process_pack_t string_process(process_pack_t ipack, data_t data);
+struct process_pack_t string_process(struct process_pack_t ipack, data_t data);
 
 // print it out
 void print_table(ptr_t ptr);
