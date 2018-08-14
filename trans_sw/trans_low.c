@@ -2,7 +2,6 @@
 
 // in-trann. list operations // unsorted list
 ptr_t list_node_add(ptr_t ptr, struct pair_t entry){
-	printf("- list node add \n");
 	ptr_t ptr_hdList = custom_malloc(sizeof(struct list_node_t));
 	struct list_node_t node;
 	node.ptr_next = ptr;
@@ -12,7 +11,6 @@ ptr_t list_node_add(ptr_t ptr, struct pair_t entry){
 	return ptr_hdList;
 }
 struct list_node_removed_t list_node_remove(ptr_t ptr){
-	printf("- list node remove \n");
 	struct list_node_removed_t returnSet;
 	returnSet.ptr_hdList = ptr;
 	if(ptr != NULL_PTR){
@@ -45,7 +43,6 @@ ptr_t hashtable_create(void){
 	return ptr;
 }
 void hashtable_entry_add(ptr_t ptr, struct pair_t entry){
-	printf("- hash entry add \n");
 	ptr_t ptr_buck = hashtable_bucket_get(ptr, entry.key);
 	ptr_t ptr_new = bucket_node_add(ptr_buck, entry);
 	if(ptr_buck != ptr_new){

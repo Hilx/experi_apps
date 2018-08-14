@@ -12,14 +12,12 @@ struct process_pack_t string_process(struct process_pack_t ipack, data_t data){
 
 	// label checking
 	if(data == LABEL_BEGIN){
-		printf("Begin\n");
 		if(ipack.ptr_list != NULL_PTR){
 			// abort prev stored list because prev trans incomplete
 			list_destroy(ipack.ptr_list);
 			opack.ptr_list = NULL_PTR;
 		}
 	}else if(data == LABEL_END){
-		printf("End\n");
 		if(ipack.ptr_list != NULL_PTR){
 			// take nodes out of list and put them into hash table
 			ptr_t ptr_hdList = ipack.ptr_list;
@@ -32,13 +30,10 @@ struct process_pack_t string_process(struct process_pack_t ipack, data_t data){
 			opack.ptr_list = NULL_PTR;
 		}
 	}else if(ipack.key_valid == 0){
-		printf("Key\n");
 		opack.key_valid = 1;
 		// data should be key
 		opack.key = data;
-
 	}else{
-		printf("value\n");
 		// data should be value
 		// got a new key-value pair, add to list
 		struct pair_t pair;
