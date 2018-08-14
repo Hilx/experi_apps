@@ -1,4 +1,4 @@
-?<Begin_tran>key0:val0a\0key1:val1a\0?,keyN:valNa\0<Begin_tran>key0:va0b\0key4:val4b\0<End_tran>\0"
+“<Begin_tran>key0:val0a\0key1:val1a\0…,keyN:valNa\0<Begin_tran>key0:va0b\0key4:val4b\0<End_tran>\0"
 e.g. Bank Transaction A : John:+4000, Adam:-2300, Sarah:+100k
        Bank Transaction B : Ben:+35k, Adam:+4000
 "<Begin_tran>John:4000\0Adam:-2300\0Sarah:100000\0<Begin_tran>Ben:35000\0Adam:4000\0<End_tran>\0"
