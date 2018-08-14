@@ -20,11 +20,11 @@ struct pair_t{
 };
 struct list_node_removed_t{
 	ptr_t ptr_hdList;
-	key_val_pair_t pair;
+	pair_t pair;
 };
 struct list_node_t{
 	ptr_t ptr_next;
-	key_val_pair_t pair;
+	pair_t pair;
 };
 struct bucket_node_t{
 	ptr_t ptr_next;
@@ -39,9 +39,9 @@ struct vals_node_t{
 // mem-acc low funcs
 // mem reads
 struct list_node_t list_node_read(ptr_t ptr);
-struct vals_node_t vals_node_read(ptr_t ptr);
 ptr_t hashtable_bucket_get(ptr_t ptr, data_t key);
 struct bucket_node_t bucket_node_read(ptr_t ptr);
+struct vals_node_t vals_node_read(ptr_t ptr);
 // mem writes
 void list_node_write(ptr_t ptr, struct list_node_t);
 void hashtable_bucket_update(ptr_t ptr, data_t key, ptr_t ptr_updated);
@@ -64,8 +64,17 @@ ptr_t bucket_node_add(ptr_t ptr, struct pair_t entry);
 ptr_t vals_node_add(ptr_t ptr, data_t val);
 
 // high level oprations
+#define LABEL_BEGIN 0xEEEE0000
+#define LABEL_END   0xEEEE1111
 
+struct process_pack_t{
+	ptr_t ptr_hashtable;
+	ptr_t ptr_list;
+	data_t key;
+	data_t key_valid;
+};
 
+struct process_pack_t string_process(process_pack_t ipack, data_t data);
 
-
-
+// print it out
+void print_table(ptr_t ptr);
